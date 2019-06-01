@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lsz.jys.apply.base.mapper.AdminInfoMapper">
+    <sql id="select_column">
+        tar.id
+,tar.user_id as userId
+,tar.nick_name as nickName
+,tar.role
+,tar.cell_phone as cellPhone
+,tar.create_by as createBy
+,tar.create_time as createTime
+,tar.update_time as updateTime
+,tar.is_delete as isDelete
+
+    </sql>
+
+    <!--插入-->
+    <insert id="addAdminInfo" useGeneratedKeys="true" keyProperty="id" keyColumn="id"  parameterType="java.util.Map">
+        INSERT INTO admin_info
+        (
+        id,user_id,nick_name,role,cell_phone,create_by,create_time,update_time,is_delete
+        )
+        VALUES
+        (
+        #{id},#{userId},#{nickName},#{role},#{cellPhone},#{createBy},#{createTime},#{updateTime},#{isDelete}
+        )
+    </insert>
+
+
+    <!--真删除-->
+    <delete id="killAdminInfo" parameterType="java.util.Map">
+        DELETE FROM admin_info
+        WHERE
+        1=1
+        <foreach collection="idList" item="id" open="AND id IN(" separator="," close=")">
+            ${id}
+        </foreach>
+    </delete>
+    <!--查询列表-->
+    <select id="getAdminInfoList" parameterType="java.util.Map"
+            resultType="com.lsz.jys.pojo.AdminInfo">
+        select
+        <include refid="select_column"/>
+        FROM admin_info tar
+        WHERE  tar.is_delete =0
+            
+    <if test="null != id">
+    AND tar.id = #{id}
+    </if>
+    
+    <if test="null != userId">
+    AND tar.user_id = #{userId}
+    </if>
+    
+    <if test="null != nickName">
+    AND tar.nick_name = #{nickName}
+    </if>
+    
+    <if test="null != role">
+    AND tar.role = #{role}
+    </if>
+    
+    <if test="null != cellPhone">
+    AND tar.cell_phone = #{cellPhone}
+    </if>
+    
+    <if test="null != createBy">
+    AND tar.create_by = #{createBy}
+    </if>
+    
+    <if test="null != createTime">
+    AND tar.create_time = #{createTime}
+    </if>
+    
+    <if test="null != updateTime">
+    AND tar.update_time = #{updateTime}
+    </if>
+    
+    <if test="null != isDelete">
+    AND tar.is_delete = #{isDelete}
+    </if>
+
+    </select>
+    <!--汇总-->
+    <select id="getAdminInfoCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+        SELECT
+        IFNULL(COUNT(tar.id),0) total
+        FROM admin_info tar
+        WHERE  tar.is_delete =0
+            
+    <if test="null != id">
+    AND tar.id = #{id}
+    </if>
+    
+    <if test="null != userId">
+    AND tar.user_id = #{userId}
+    </if>
+    
+    <if test="null != nickName">
+    AND tar.nick_name = #{nickName}
+    </if>
+    
+    <if test="null != role">
+    AND tar.role = #{role}
+    </if>
+    
+    <if test="null != cellPhone">
+    AND tar.cell_phone = #{cellPhone}
+    </if>
+    
+    <if test="null != createBy">
+    AND tar.create_by = #{createBy}
+    </if>
+    
+    <if test="null != createTime">
+    AND tar.create_time = #{createTime}
+    </if>
+    
+    <if test="null != updateTime">
+    AND tar.update_time = #{updateTime}
+    </if>
+    
+    <if test="null != isDelete">
+    AND tar.is_delete = #{isDelete}
+    </if>
+
+    </select>
+    <!--查询单个-->
+    <select id="getAdminInfo" parameterType="java.util.Map"
+            resultType="com.lsz.jys.pojo.AdminInfo">
+        select
+        <include refid="select_column"/>
+        from admin_info tar
+        WHERE  tar.is_delete =0
+            
+    <if test="null != id">
+    AND tar.id = #{id}
+    </if>
+    
+    <if test="null != userId">
+    AND tar.user_id = #{userId}
+    </if>
+    
+    <if test="null != nickName">
+    AND tar.nick_name = #{nickName}
+    </if>
+    
+    <if test="null != role">
+    AND tar.role = #{role}
+    </if>
+    
+    <if test="null != cellPhone">
+    AND tar.cell_phone = #{cellPhone}
+    </if>
+    
+    <if test="null != createBy">
+    AND tar.create_by = #{createBy}
+    </if>
+    
+    <if test="null != createTime">
+    AND tar.create_time = #{createTime}
+    </if>
+    
+    <if test="null != updateTime">
+    AND tar.update_time = #{updateTime}
+    </if>
+    
+    <if test="null != isDelete">
+    AND tar.is_delete = #{isDelete}
+    </if>
+
+    </select>
+
+    <!--修改-->
+    <update id="updAdminInfo" parameterType="java.util.Map">
+        update admin_info
+        <set>
+                <if test="userId != null">user_id=#{userId},</if>
+    <if test="nickName != null">nick_name=#{nickName},</if>
+    <if test="role != null">role=#{role},</if>
+    <if test="cellPhone != null">cell_phone=#{cellPhone},</if>
+    <if test="createBy != null">create_by=#{createBy},</if>
+    <if test="updateTime != null">update_time=#{updateTime},</if>
+    <if test="isDelete != null">is_delete=#{isDelete},</if>
+
+        </set>
+        where id=#{id}
+    </update>
+    <!--软删除-->
+    <update id="delAdminInfo" parameterType="java.util.Map">
+        update admin_info
+        <set>
+            is_delete=1
+        </set>
+        WHERE
+        1=1
+        <foreach collection="idList" item="id" open="AND id IN(" separator="," close=")">
+            ${id}
+        </foreach>
+    </update>
+</mapper>
