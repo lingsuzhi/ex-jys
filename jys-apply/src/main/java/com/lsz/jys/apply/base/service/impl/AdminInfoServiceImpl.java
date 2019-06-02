@@ -29,7 +29,7 @@ public class AdminInfoServiceImpl implements AdminInfoService {
 
     //处理对象
     private static AdminInfo manageAdminInfo(AdminInfo adminInfo) {
-        if (adminInfo == null) return adminInfo;
+        if (adminInfo == null) return null;
 
         return adminInfo;
     }
