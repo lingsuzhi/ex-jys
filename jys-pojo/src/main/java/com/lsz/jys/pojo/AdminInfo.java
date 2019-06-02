@@ -31,9 +31,6 @@ public class AdminInfo {
     //修改时间
     private Date updateTime;
 
-    private Integer isDelete;
-
-
     public Long getId() {
         return id;
     }
@@ -96,14 +93,6 @@ public class AdminInfo {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Integer getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
     }
 
 }

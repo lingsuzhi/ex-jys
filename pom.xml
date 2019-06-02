@@ -10,7 +10,7 @@
     <modules>
         <module>jys-core</module>
         <module>jys-pojo</module>
-
+        <module>jys-gateway</module>
         <module>jys-eureka</module>
         <module>jys-apply</module>
     </modules>

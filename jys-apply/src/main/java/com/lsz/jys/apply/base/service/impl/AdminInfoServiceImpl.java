@@ -5,10 +5,9 @@ import com.lsz.jys.apply.base.mapper.AdminInfoMapper;
 import com.lsz.jys.apply.base.service.AdminInfoService;
 import com.lsz.jys.common.BasePage;
 import com.lsz.jys.common.PagesParam;
+import com.lsz.jys.pojo.AdminInfo;
 import com.lsz.jys.util.CommonUtils;
 import com.lsz.jys.util.ValidateUtil;
-import com.lsz.jys.pojo.AdminInfo;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 /**
- *用户资料
+ * 用户资料
  */
 @Service("adminInfoServiceImpl")
 public class AdminInfoServiceImpl implements AdminInfoService {
@@ -28,18 +27,22 @@ public class AdminInfoServiceImpl implements AdminInfoService {
     @Autowired
     private AdminInfoMapper adminInfoMapper;
 
+    //处理对象
+    private static AdminInfo manageAdminInfo(AdminInfo adminInfo) {
+        if (adminInfo == null) return adminInfo;
+
+        return adminInfo;
+    }
+
     @Override
     @Transactional
-    public Map<String, Object> addAdminInfo(Map<String, Object> parameterMap) {
-        parameterMap.put("createTime", new Date());
-        parameterMap.put("updateTime", new Date());
-        parameterMap.put("isDelete", 0);
-
-
-        parameterMap.put("id", null);
-        Integer count = adminInfoMapper.addAdminInfo(parameterMap);
+    public AdminInfo addAdminInfo(AdminInfo adminInfo) {
+        adminInfo.setCreateTime(new Date());
+        adminInfo.setUpdateTime(new Date());
+        adminInfo.setId(null);
+        Integer count = adminInfoMapper.addAdminInfo(adminInfo);
         logger.info("addAdminInfo 完成:{}", count);
-        return parameterMap;
+        return adminInfo;
     }
 
     @Override
@@ -62,14 +65,13 @@ public class AdminInfoServiceImpl implements AdminInfoService {
 
     @Override
     @Transactional
-    public Map<String, Object> updAdminInfo(Map<String, Object> parameterMap) {
+    public AdminInfo updAdminInfo(AdminInfo adminInfo) {
 
-        String id = ValidateUtil.validateParamContainKey("id", parameterMap);
-
-        parameterMap.put("updateTime", new Date());
-        Integer count = adminInfoMapper.updAdminInfo(parameterMap);
+        Long id = adminInfo.getId();
+        adminInfo.setUpdateTime(new Date());
+        Integer count = adminInfoMapper.updAdminInfo(adminInfo);
         logger.info("updAdminInfo 完成:{} {}", count, id);
-        return parameterMap;
+        return adminInfo;
     }
 
     @Override
@@ -93,13 +95,6 @@ public class AdminInfoServiceImpl implements AdminInfoService {
 
         returnMap.setContent(list);
         return returnMap;
-    }
-
-    //处理对象
-    private static AdminInfo manageAdminInfo(AdminInfo adminInfo) {
-        if (adminInfo == null) return adminInfo;
-
-        return adminInfo;
     }
 
     @Override

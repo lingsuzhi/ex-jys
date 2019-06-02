@@ -11,15 +11,13 @@ import java.util.Map;
 @Component("baseAdminInfoMapper")
 public interface AdminInfoMapper {
 
-    Integer addAdminInfo(Map<String, Object> paramMap);
+    Integer addAdminInfo(AdminInfo adminInfo);
 
     Integer delAdminInfo(Map<String, Object> paramMap);
 
-    Integer killAdminInfo(Map<String, Object> paramMap);
-
     AdminInfo getAdminInfo(Map<String, Object> paramMap);
 
-    Integer updAdminInfo(Map<String, Object> paramMap);
+    Integer updAdminInfo(AdminInfo adminInfo);
 
     List<AdminInfo> getAdminInfoList(Map<String, Object> paramMap);
 

@@ -12,11 +12,11 @@ import java.util.Map;
  */
 public interface AdminInfoService {
 
-    Map<String, Object> addAdminInfo(Map<String, Object> parameterMap);
+    AdminInfo addAdminInfo(AdminInfo adminInfo);
 
     Map<String, Object> delAdminInfo(Map<String, Object> parameterMap);
 
-    Map<String, Object> updAdminInfo(Map<String, Object> parameterMap);
+    AdminInfo updAdminInfo(AdminInfo adminInfo);
 
     BasePage<AdminInfo> getAdminInfoList(PagesParam parameterMap);
 

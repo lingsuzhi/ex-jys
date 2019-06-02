@@ -24,8 +24,6 @@ import java.util.Map;
 @RequestMapping("/adminInfoController")
 public class AdminInfoController {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
     private AdminInfoService adminInfoService;
 
@@ -33,10 +31,8 @@ public class AdminInfoController {
      * 添加单个
      */
     @RequestMapping(value = "/addAdminInfo", method = RequestMethod.POST)
-    public ResponseInfo<Map<String, Object>> addAdminInfo(@RequestBody Map<String, Object> param) {
-
-        Map<String, Object> resultMap = adminInfoService.addAdminInfo(param);
-        return ResponseInfo.success(resultMap);
+    public ResponseInfo<AdminInfo> addAdminInfo(@RequestBody AdminInfo adminInfo) {
+        return ResponseInfo.success(adminInfoService.addAdminInfo(adminInfo));
     }
 
     /**
@@ -53,10 +49,8 @@ public class AdminInfoController {
      * 修改
      */
     @RequestMapping(value = "/updateAdminInfo", method = RequestMethod.POST)
-    public ResponseInfo<Map<String, Object>> updAdminInfo(@RequestBody Map<String, Object> param) {
-
-        Map<String, Object> resultMap = adminInfoService.updAdminInfo(param);
-        return ResponseInfo.success(resultMap);
+    public ResponseInfo<AdminInfo> updAdminInfo(@RequestBody AdminInfo adminInfo) {
+        return ResponseInfo.success(adminInfoService.updAdminInfo(adminInfo));
     }
 
     /**
